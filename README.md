@@ -1,17 +1,19 @@
-Automated Terminology Extractor for Localization
-Project Overview:
+# Automated Terminology Extractor for Localization (v2.0)
+
+**Project Overview:**
 In large-scale localization projects, manually extracting terms to build a glossary is highly time-consuming. This Python script automates the initial phase of terminology extraction using Natural Language Processing (NLP).
 
-How it works:
+**Version 2.0 Updates:**
+* **POS Tagging:** Integrates NLTK's `averaged_perceptron_tagger` to identify the grammatical category of each word in context.
+* **Lemmatization:** Uses WordNet to reduce words to their dictionary roots (e.g., successfully merging "know" and "knows" into "know").
 
-Takes raw text (e.g., technical or medical documents).
+**How it works:**
+1. Takes raw text (e.g., technical documents).
+2. Uses `NLTK`'s `word_tokenize` for smart tokenization.
+3. Tags each token with its Part-of-Speech (POS) to preserve grammatical context.
+4. Filters out punctuation and numbers using `.isalpha()`.
+5. Removes standard English stop words using the `NLTK` corpus.
+6. Lemmatizes the remaining words based on their POS tags.
+7. Outputs a frequency dictionary of base terms to be reviewed by the linguist.
 
-Uses NLTK's word_tokenize for smart tokenization.
-
-Filters out punctuation and numbers using .isalpha().
-
-Removes standard English stop words using the NLTK corpus.
-
-Outputs a frequency dictionary of meaningful terms to be reviewed by the linguist.
-
-Next Steps: Future versions will include Lemmatization (grouping "know" and "knows") and bilingual mapping.
+**Linguistic Insights & Next Steps:** While effective, the basic POS tagger sometimes struggles with structural ambiguity (e.g., mistakenly tagging the noun "meaning" as a verb in certain contexts, reducing it to "mean"). Future versions will explore Transformer-based models (like spaCy or Hugging Face) for better contextual accuracy and bilingual mapping.
